@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Client Handbook | Sonny Sayi Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           1. DESIGN TOKENS & VARIABLES
+           ========================================= */
+        :root {
+            --color-deep: #0a0f0c;       /* Primary Brand Color */
+            --color-darker: #050806;     /* Darker Shade for Depth */
+            --color-light: #ffffff;      /* White */
+            --color-muted: #8a9990;      /* Desaturated green-gray for secondary text */
+            --font-main: 'Montserrat', sans-serif;
+        }
+
+        /* =========================================
+           2. GLOBAL RESET & TYPOGRAPHY
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-radius: 0 !important; /* STRICT: ZERO ROUNDED BORDERS */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-deep);
+            color: var(--color-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* =========================================
+           3. WATERMARK EFFECT
+           ========================================= */
+        body::before {
+            content: "SONNY SAYI SOLUTIONS";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 12vw;
+            font-weight: 900;
+            color: var(--color-light);
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+            letter-spacing: 10px;
+        }
+
+        /* =========================================
+           4. LAYOUT & NAVIGATION
+           ========================================= */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            padding: 5rem 0 3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 4rem;
+        }
+
+        .brand-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1;
+            color: var(--color-light);
+            margin-bottom: 1.5rem;
+            border-left: 6px solid var(--color-light);
+            padding-left: 2rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--color-muted);
+            max-width: 550px;
+            padding-left: 2rem;
+            font-weight: 400;
+        }
+
+        .doc-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 15, 12, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 4rem;
+        }
+
+        .doc-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .doc-nav a {
+            color: var(--color-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .doc-nav a:hover, .doc-nav a.active {
+            color: var(--color-light);
+            border-bottom: 2px solid var(--color-light);
+        }
+
+        /* =========================================
+           5. COMPONENTS & SECTIONS
+           ========================================= */
+        section {
+            margin-bottom: 6rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-light);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: var(--color-muted);
+            font-weight: 400;
+        }
+
+        .highlight-block {
+            background: var(--color-darker);
+            border-left: 4px solid var(--color-light);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-block p {
+            color: var(--color-light);
+            margin: 0;
+        }
+
+        .warning-block {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .warning-block h4 {
+            color: var(--color-light);
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .warning-block p, .warning-block li {
+            color: var(--color-muted);
+            font-weight: 400;
+        }
+
+        .step-card {
+            background: var(--color-darker);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--color-light);
+            transform: translateX(5px);
+        }
+
+        .step-card strong {
+            color: var(--color-light);
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .step-card ol {
+            margin-left: 1.5rem;
+            color: var(--color-muted);
+        }
+
+        .step-card li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* =========================================
+           6. INVOICE & DOWNLOAD COMPONENT
+           ========================================= */
+        .invoice-container {
+            background: var(--color-light);
+            color: var(--color-deep);
+            padding: 3rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--color-deep);
+            padding-bottom: 1.5rem;
+        }
+
+        .invoice-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .invoice-brand p {
+            color: var(--color-deep);
+            font-size: 0.85rem;
+            margin: 0;
+            opacity: 0.7;
+        }
+
+        .invoice-title {
+            text-align: right;
+        }
+
+        .invoice-title h4 {
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(10, 15, 12, 0.1);
+        }
+
+        .invoice-label {
+            font-weight: 600;
+            color: var(--color-deep);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .invoice-value {
+            font-weight: 700;
+            color: var(--color-deep);
+            font-size: 1.1rem;
+        }
+
+        .status-settled {
+            color: var(--color-deep);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(10, 15, 12, 0.1);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .invoice-total {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--color-deep);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .invoice-total .label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .invoice-total .value {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--color-deep);
+            color: var(--color-light);
+            border: none;
+            padding: 1rem 2rem;
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--color-darker);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           7. SCROLL-BASED MOTION EFFECTS
+           ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           8. PRINT STYLES (For PDF Download)
+           ========================================= */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            body::before {
+                opacity: 0.05 !important;
+                color: black !important;
+            }
+            .doc-nav, .download-btn, header, #overview, #access, #golden-rule, #sanity-guide, #support {
+                display: none !important;
+            }
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+            #financials {
+                margin: 0;
+                page-break-inside: avoid;
+            }
+            #financials h2 {
+                color: black !important;
+                border-bottom: 2px solid black;
+                padding-bottom: 1rem;
+            }
+            .invoice-container {
+                border: 2px solid black;
+                padding: 2rem;
+                margin: 2rem 0;
+            }
+            .invoice-row, .invoice-header, .invoice-total {
+                border-color: black !important;
+            }
+            .invoice-label, .invoice-value, .invoice-brand h3, .invoice-brand p, .invoice-title h4, .status-settled {
+                color: black !important;
+            }
+        }
+
+        /* =========================================
+           9. RESPONSIVE DESIGN
+           ========================================= */
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            h1 { font-size: 2.5rem; padding-left: 1rem; border-left-width: 4px; }
+            .subtitle { padding-left: 1rem; }
+            .doc-nav ul { gap: 1rem; }
+            .doc-nav a { font-size: 0.7rem; }
+            .invoice-header { flex-direction: column; gap: 1.5rem; }
+            .invoice-title { text-align: left; }
+            .invoice-container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="reveal">
+            <span class="brand-tag">Sonny Sayi Solutions — Official Documentation</span>
+            <h1>Client<br>Handbook</h1>
+            <p class="subtitle">A comprehensive guide to managing, updating, and maintaining your digital infrastructure.</p>
+        </header>
+
+        <nav class="doc-nav reveal">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#access">Access</a></li>
+                <li><a href="#golden-rule">Guidelines</a></li>
+                <li><a href="#sanity-guide">CMS Guide</a></li>
+                <li><a href="#financials">Invoice</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="overview" class="reveal">
+                <h2>01. Project Overview</h2>
+                <p>The "Between Two Worlds" platform was custom-engineered to reflect a unique, nuanced digital experience. It features a distinct editorial aesthetic, utilizing a strict geometric layout, custom typography, and dynamic content galleries.</p>
+                <p>The backend architecture has been specifically designed to allow seamless content updates while preserving the integrity of the core design and structural code.</p>
+            </section>
+
+            <section id="access" class="reveal">
+                <h2>02. System Access</h2>
+                <div class="highlight-block">
+                    <p><strong>Live Platform:</strong> <a href="https://sidelined-gem-main.vercel.app/" target="_blank" style="color: var(--color-light); text-decoration: underline;">sidelined-gem-main.vercel.app</a></p>
+                    <p style="margin-top: 1rem; margin-bottom: 0;"><strong>Administration Dashboard:</strong> <a href="https://www.sanity.io/organizations/oFkgJWwoE/project/fertwlow" target="_blank" style="color: var(--color-light); text-decoration: underline;">Sanity CMS Portal</a></p>
+                </div>
+            </section>
+
+            <section id="golden-rule" class="reveal">
+                <h2>03. Operational Guidelines</h2>
+                <div class="highlight-block">
+                    <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem;">Content vs. Structure</p>
+                    <p>You have full administrative control over the <strong>Content</strong> (text and media). You must not alter the <strong>Structure</strong> (layout, schema configurations, or navigation menus). The system is engineered to auto-format your content.</p>
+                </div>
+            </section>
+
+            <section id="sanity-guide" class="reveal">
+                <h2>04. CMS Execution Guide</h2>
+                
+                <div class="highlight-block" style="margin-bottom: 2rem;">
+                    <p style="margin: 0;"><strong>Navigation Protocol:</strong> Bypass the side menus. Utilize the <strong>Search Bar</strong> at the top of the dashboard. Type the target document name (e.g., "Identity", "Images") and select it directly.</p>
+                </div>
+
+                <div class="step-card">
+                    <strong>Protocol 1: Text Updates</strong>
+                    <ol>
+                        <li>Search for the target section.</li>
+                        <li>Modify the text blocks directly.</li>
+                        <li><strong>Mandatory:</strong> Click the green "Publish" button in the top-right corner to deploy changes to the live site.</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <strong>Protocol 2: Media Replacement</strong>
+                    <ol>
+                        <li>Search for "Images" or "Gallery".</li>
+                        <li>Select the existing asset, click the ellipsis (...), and choose "Replace".</li>
+                        <li>Upload the new file and click "Publish".</li>
+                    </ol>
+                </div>
+
+                <div class="warning-block">
+                    <h4>Restricted Actions</h4>
+                    <p>To maintain system stability, do not interact with:</p>
+                    <ul>
+                        <li>Settings / Configuration schemas.</li>
+                        <li>Navigation or routing structures.</li>
+                        <li>Document deletion (use "Unpublish" or clear text instead).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="financials" class="reveal">
+                <h2>05. Financial Summary & Invoice</h2>
+                <p>Below is the official record of the project investment and the ongoing maintenance agreement.</p>
+                
+                <div class="invoice-container" id="printable-invoice">
+                    <div class="invoice-header">
+                        <div class="invoice-brand">
+                            <h3>Sonny Sayi Solutions</h3>
+                            <p>Nairobi, Kenya</p>
+                            <p>info@sonnysayisolutions.co.ke</p>
+                        </div>
+                        <div class="invoice-title">
+                            <h4>Invoice</h4>
+                            <p style="color: var(--color-deep); margin: 0; font-size: 0.9rem;">Date: October 21, 2026</p>
+                        </div>
+                    </div>
+
+                    <div class="invoice-row">
+                        <span class="invoice-label">Initial Website Development & Design</span>
+                        <span class="invoice-value">38,000 KSH</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span class="invoice-label">Payment Status</span>
+                        <span class="status-settled">Cleared & Settled</span>
+                    </div>
+                    
+                    <div class="invoice-total">
+                        <span class="label">Ongoing Annual Maintenance & Hosting</span>
+                        <span class="value">5,000 KSH / Year</span>
+                    </div>
+                    
+                    <p style="color: var(--color-deep); font-size: 0.85rem; margin-top: 2rem; opacity: 0.7;">
+                        * server hosting, Sanity CMS hosting, and routine security maintenance. Invoices are issued 30 days prior to renewal.
+                    </p>
+                </div>
+
+                <button class="download-btn" onclick="window.print()">
+                    <span>↓</span> Download Invoice as PDF
+                </button>
+            </section>
+
+            <section id="support" class="reveal" style="margin-bottom: 8rem;">
+                <h2>06. Support Protocol</h2>
+                <p>For structural modifications, bug reports, or administrative assistance, initiate contact through the official channels below.</p>
+                <div class="highlight-block">
+                    <p style="margin-bottom: 0.5rem;"><strong>Direct Contact:</strong> info@sonnysayisolutions.co.ke</p>
+                    <p style="margin: 0;"><strong>Service Level Agreement:</strong> Response within 24-48 business hours.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Scroll-based motion effect observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        // Active nav link highlighting on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.doc-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
